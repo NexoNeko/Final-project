@@ -19,7 +19,7 @@ class User
 	mutateBrain()
 	{
 		//Mutate neural network
-		NeuralNetwork.mutate(this.brain,0.1);
+		NeuralNetwork.mutate(this.brain,0.5);
 	}
 
 }

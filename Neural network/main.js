@@ -1,7 +1,15 @@
+/**
+ * Maybe mutate bias on every 2-3 dislikes to ensure we get some learning going.
+ * The network itself will learn as the user likes or dislikes certain things.
+ */
+
 //This handles the visualization of the NN
 const networkCanvas=document.getElementById("networkCanvas");
 networkCanvas.width=600;
 const networkCtx = networkCanvas.getContext("2d");
+
+const getRandomValue = () => Math.floor(Math.random() * 3) - 1;
+let defaultTags = [-1, 0, 1, -1, 1, 0, -1, 0, 0, 1];
 
 /**
  * This creates a new user with a brain
@@ -34,6 +42,7 @@ function localStorage_discard()
 	localStorage.removeItem("userBrain");
 }
 
+let tags = defaultTags;
 /*
  * Accepts an array of -1, 0 and 1 for each tag and returns a new array with -1, 0 and 1
  * -1: Unliked tags
@@ -42,8 +51,23 @@ function localStorage_discard()
  */
 function getOutputs(tags, user = user)
 {
+	//Divide every value by 10 to get decimals
+	//tags = tags.map(value => value / 10);
 	//send the tags as well as the neural network
+	console.log('Sent tags: ' + tags);
 	const outputs=NeuralNetwork.feedForward(tags,user.brain);
 	//outputs[0] to outputs[249] contains the tags
-	console.log(outputs);
+	console.log('output: ' + outputs);
+}
+
+function mutate(user){
+	user.mutateBrain();
+	getOutputs(defaultTags, user);
+}
+
+function randTags()
+{
+	let defaultTags = Array.from({ length: 10 }, getRandomValue);
+	console.log('new tags: ' + defaultTags);
+	let tags = defaultTags;
 }

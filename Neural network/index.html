@@ -5,9 +5,11 @@
 </head>
 <body>
 	<div id="verticalButtons">
-	<button onclick="localStorage_save()">💾</button>
-		<button onclick="localStorage_save()">💾</button>
-		<button onclick="localStorage_discard()">🗑️</button>
+		<button onclick="getOutputs(tags, user)">Send tags</button>
+		<button onclick="mutate(user)">Mutate biases</button>
+		<button onclick="randTags()">Randomize sent tags</button>
+		<button onclick="localStorage_save()">Save brain local</button>
+		<button onclick="localStorage_discard()">Delete brain local️</button>
 	</div>
 	<canvas id="networkCanvas"></canvas>
 	<script src="user.js"></script>
