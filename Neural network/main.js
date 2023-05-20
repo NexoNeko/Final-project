@@ -67,7 +67,8 @@ function mutate(user){
 
 function randTags()
 {
-	let defaultTags = Array.from({ length: 10 }, getRandomValue);
+	defaultTags = Array.from({ length: 10 }, getRandomValue);
 	console.log('new tags: ' + defaultTags);
-	let tags = defaultTags;
+	tags = defaultTags;
+	return defaultTags;
 }
