@@ -1,17 +1,5 @@
 /**
  * This simple neural network will only use values between -1 and 1
- * neural networks actually compare sum+level.biases[i]>0 since
- * biases can go either way. They use the Hyperplane equation 
- * but this one uses the line equation. (weight*sensor+bias=0)
- * using the line equation with values from -1 to 1, we've got the whole Range
- * covered.
- * 2 sensors give us a 2d space, but more sensors add more dimensions.
- * Scientists don't use binary values like us, they allow neurons to fire all the time
- * just different amounts.
- * Only the last ones need to be binary, to give a clear yes or no.
- * values tend to go wild on actual neural networks, so functions like
- * sigmoid, hyperbolic tangent, ReLU and others are used to bring them
- * back to scale. maybe look up TensorFlow library.
  */
 class NeuralNetwork{
 	//neuronCounts will be the number of neurons in each layer.
@@ -26,8 +14,7 @@ class NeuralNetwork{
 				));
 		}
 	}
-	//This method takes a neural network as an input, as well as The
-	//sensor information.
+	//This method takes a neural network as an input
 	static feedForward(givenInputs, network)
 	{
 		// get outputs by calling level feedForwards with the given inputs and networks first level
@@ -39,7 +26,7 @@ class NeuralNetwork{
 		{
 			outputs=Level.feedForward(outputs,network.levels[i]);
 		}
-		//This is whats gonna tell us what the car should do
+		//This is whats gonna tell us what tags should we recommend
 		return outputs;
 	}
 	static mutate(network,amount=1)
@@ -72,9 +59,6 @@ class Level
 {
 	constructor(inputCount,outputCount)
 	{
-		//we'll get the inputs through the car sensors
-		//what we need to do is figure out the outputs based
-		//on the weights and biases we've got here.
 		this.inputs=new Array(inputCount);
 		this.outputs=new Array(outputCount);
 		//The bias is a value above which the neuron will fire
@@ -116,8 +100,6 @@ class Level
 	static feedForward(givenInputs, Level)
 	{
 		//set the Level inputs to the given inputs
-		//we do this to separate the inputs from the car sensors
-		//from the inputs from nodes from other Level
 		for(let i=0;i<Level.inputs.length;i++)
 		{
 			Level.inputs[i]=givenInputs[i];
