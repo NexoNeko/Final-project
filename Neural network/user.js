@@ -11,7 +11,8 @@ class User
 		}
 		else
 		{
-			this.brain=new NeuralNetwork([10,15,10]);
+			//Edit these numbers to change the amount of neurons to use
+			this.brain=new NeuralNetwork([249,260,249]);
 			this.mutateBrain();
 		}
 	}
